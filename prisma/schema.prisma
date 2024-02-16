@@ -9,3 +9,67 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id String @id @default(uuid())
+  email String @unique
+  userName String @unique
+  password String
+  profile Profile?
+  posts Post[]
+  likes Likes[]
+  notifications Notifications[]
+  isDeleted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+enum Gender {
+  Male
+  Female
+  Other
+}
+model Profile {
+  id String @id @default(uuid())
+  name String
+  gender Gender?
+  address Json?
+  userId String @unique
+  user User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model Post {
+  id String @id @default(uuid())
+  title String
+  description String
+  userId String @unique
+  user User @relation(fields: [userId],references: [id])
+  likes Likes[]
+  isDeleted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model Likes {
+  id String @id @default(uuid())
+  userId String @unique
+  user User @relation(fields: [userId], references: [id])
+  posts Post[]
+  isDeleted Boolean @default(false)
+  createdAt DateTime @default(now())
+}
+
+enum NotificationType {
+  Like
+}
+model Notifications {
+  id String @id @default(uuid())
+  isRead Boolean @default(false)
+  isCleared Boolean @default(false)
+  type NotificationType
+  userId String @unique
+  user User @relation(fields: [userId], references: [id])
+}
+

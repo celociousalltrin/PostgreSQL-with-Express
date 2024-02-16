@@ -30,7 +30,7 @@ export const successResponse = async ({
     message: (responseDetails as responseDetailsTypes)?.message,
     code: (responseDetails as responseDetailsTypes)?.code,
   };
-  return await res.status(status).json(responseFormat);
+  return res.status(status).json(responseFormat);
 };
 
 export const errorResponse = async ({
@@ -43,5 +43,5 @@ export const errorResponse = async ({
     message: (responseDetails as responseDetailsTypes)?.message,
     code: (responseDetails as responseDetailsTypes)?.code,
   };
-  return await res.status(status).json(responseFormat);
+  return res.status(status).json(responseFormat);
 };
