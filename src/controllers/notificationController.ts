@@ -15,6 +15,7 @@ export const createNotification = [
     }
   },
 ];
+
 export const readNotification = [
   async (req: Request, res: Response) => {
     try {
