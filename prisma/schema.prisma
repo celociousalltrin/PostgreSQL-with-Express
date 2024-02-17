@@ -44,7 +44,7 @@ model Post {
   id String @id @default(uuid())
   title String
   description String
-  userId String @unique
+  userId String 
   user User @relation(fields: [userId],references: [id])
   likes Likes[]
   isDeleted Boolean @default(false)
@@ -54,7 +54,7 @@ model Post {
 
 model Likes {
   id String @id @default(uuid())
-  userId String @unique
+  userId String 
   user User @relation(fields: [userId], references: [id])
   posts Post[]
   isDeleted Boolean @default(false)
@@ -63,13 +63,14 @@ model Likes {
 
 enum NotificationType {
   Like
+  Post
 }
 model Notifications {
   id String @id @default(uuid())
   isRead Boolean @default(false)
   isCleared Boolean @default(false)
   type NotificationType
-  userId String @unique
+  userId String
   user User @relation(fields: [userId], references: [id])
 }
 

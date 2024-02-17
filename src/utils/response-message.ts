@@ -3,6 +3,9 @@ import { responseDetailsTypes } from "./utils-types";
 const responseData = [
   { code: "OK001", message: "User Created Successfully" },
   { code: "OK002", message: "Login in SuccessFully" },
+  { code: "OK003", message: "Post has been Created" },
+  { code: "OK004", message: "Post has been Updated" },
+  { code: "OK005", message: "Post has been deleted" },
 
   { code: "ER999", message: "Something went wrong" },
 

@@ -28,17 +28,3 @@ export const getUser = [
     }
   },
 ];
-
-export const deleteUser = [
-  async (req: Request, res: Response) => {
-    try {
-      return successResponse({
-        res,
-        responseDetails: responseMessage("OK001"),
-      });
-    } catch (err: any) {
-      console.log("🚀 ~ async ~ err:", err);
-      errorResponse({ res, responseDetails: responseMessage("ER999") });
-    }
-  },
-];
