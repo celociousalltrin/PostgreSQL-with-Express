@@ -78,6 +78,17 @@ export const getSinglePost = [
         where: {
           id,
         },
+        include: {
+          likes: {
+            where: {
+              isDeleted: false,
+            },
+            include: {
+              user: true,
+            },
+          },
+          user: true,
+        },
       });
       return successResponse({
         res,

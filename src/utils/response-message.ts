@@ -6,6 +6,8 @@ const responseData = [
   { code: "OK003", message: "Post has been Created" },
   { code: "OK004", message: "Post has been Updated" },
   { code: "OK005", message: "Post has been deleted" },
+  { code: "OK006", message: "Like has been Created" },
+  { code: "OK007", message: "Like has been deleted" },
 
   { code: "ER999", message: "Something went wrong" },
 
