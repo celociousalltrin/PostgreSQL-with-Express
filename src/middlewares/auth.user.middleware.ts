@@ -3,13 +3,15 @@ import { NextFunction, Response, Request } from "express";
 import { responseMessage } from "../utils/response-message";
 import { errorResponse } from "../utils/response-handler";
 import { tokenVerification } from "../utils/common-function";
+import { prisma } from "../config/prisma-config";
+import type { User } from "@prisma/client";
 
 //Declaration Merging
 declare global {
   namespace Express {
     interface Request {
       new_access_token?: string;
-      // userDetails: userSchemaTypes;
+      userDetails: User;
     }
   }
 }
@@ -74,6 +76,25 @@ export const authUserMiddleware = async (
         responseDetails: responseMessage("ER901"),
         status: 401,
       });
+    }
+
+    const userDetails = await prisma.user.findUnique({
+      where: {
+        email: (refreshTokenVerify as { user_email: string })?.user_email,
+      },
+      include: {
+        profile: true,
+      },
+    });
+
+    if (!userDetails) {
+      return errorResponse({
+        res,
+        responseDetails: responseMessage(userDetails ? "ER903" : "ER902"),
+        status: 401,
+      });
+    } else {
+      req.userDetails = userDetails;
     }
 
     next();

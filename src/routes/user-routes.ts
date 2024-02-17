@@ -3,7 +3,7 @@ import { getUser, deleteUser } from "../controllers/userController";
 
 const router = Router();
 
-router.get("/get-user", getUser);
+router.get("/", getUser);
 router.put("/delete-user", deleteUser);
 
 export default router;
